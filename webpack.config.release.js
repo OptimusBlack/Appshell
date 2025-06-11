@@ -65,8 +65,8 @@ module.exports = {
       name: MODULE_NAME,
       filename: 'remoteEntry.js',
       remotes: {
-        [MODULE_NAME]: `${MODULE_NAME}@/remoteEntry.js`,
-        remote1: 'remote1@https://remote-1-five.vercel.app/remoteEntry.js'
+        [MODULE_NAME]: `${MODULE_NAME}@/remoteEntry.js?[window.cacheHash]`,
+        remote1: 'remote1@https://remote-1-five.vercel.app/remoteEntry.js?[window.cacheHash]'
       },
       exposes: { './exposed': './exposed' },
       shared: {
@@ -81,6 +81,7 @@ module.exports = {
         },
       },
     }),
+    new ExternalTemplateRemotesPlugin(),
     new HtmlWebPackPlugin({
       template: 'index.html',
       excludeChunks: [MODULE_NAME],
